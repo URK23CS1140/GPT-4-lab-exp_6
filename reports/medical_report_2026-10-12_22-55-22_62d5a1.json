@@ -1,0 +1,62 @@
+{
+  "report_id": "#20261012_225522_62d5a1",
+  "timestamp": "2026-10-12 22:55:22",
+  "engine": "Clinical Diagnostic Rule Engine (With Fallback)",
+  "patient_profile": {
+    "age": 54,
+    "sex": "Male",
+    "demographic_group": "Adult",
+    "clinical_notes": "Adult individual (54 years old, Male)"
+  },
+  "clinical_context": {
+    "duration": "45 minutes",
+    "acuity": "Indeterminate / Ongoing",
+    "severity": "Severe",
+    "previous_conditions": "Hypertension",
+    "high_risk_comorbidities": [
+      "Cardiovascular Risk Factor"
+    ],
+    "medications": "Amlodipine 5mg",
+    "allergies": "Penicillin",
+    "additional_info": "Started suddenly",
+    "summary_sentence": "Patient presents with indeterminate / ongoing symptoms lasting 45 minutes, rated as severe severity. Underlying conditions: Hypertension. Current medications: Amlodipine 5mg. Known allergies: Penicillin."
+  },
+  "raw_input_symptoms": "Crushing chest pain radiating to left arm and jaw with severe shortness of breath",
+  "analysis": {
+    "reported_symptoms": [
+      "Shortness of breath (Dyspnea)",
+      "Chest pain"
+    ],
+    "duration": "45 minutes",
+    "severity": "Severe",
+    "possible_conditions": [
+      {
+        "name": "Acute Coronary Syndrome / Cardiac Event",
+        "explanation": "Reported chest pain radiating to arm, neck, or jaw is a classic emergency red flag requiring immediate ECG and cardiac marker evaluation."
+      },
+      {
+        "name": "Acute Pulmonary or Vascular Emergency",
+        "explanation": "Severe acute cardiopulmonary compromise cannot be ruled out without immediate clinical intervention."
+      }
+    ],
+    "why_considered": "Critical red-flag symptoms were identified (e.g., chest pain with radiation, acute breathing distress, or neurological signs). These presentations demand emergent medical evaluation to rule out life-threatening cardiovascular or respiratory conditions.",
+    "additional_information_needed": [
+      "Immediate 12-lead Electrocardiogram (ECG)",
+      "Troponin and cardiac biomarker laboratory panel",
+      "Vital signs (Blood pressure, Heart rate, Pulse Oximetry)"
+    ],
+    "follow_up_questions": [
+      "Have the symptoms been steadily improving, worsening, or staying the same?",
+      "Are there any specific triggers or activities that make the discomfort worse?",
+      "Are there any other unusual bodily sensations or changes you have noticed?"
+    ],
+    "triage_level": "EMERGENCY",
+    "medical_attention": "Seek IMMEDIATE emergency medical attention. Call local emergency services (e.g., 911 / 112) or proceed to the nearest emergency department right away.",
+    "red_flags": [
+      "Chest pain or pressure (cardiac emergency risk)",
+      "Severe respiratory distress / acute shortness of breath"
+    ],
+    "disclaimer": "This is an informational AI analysis and not a medical diagnosis."
+  },
+  "disclaimer": "This is an informational AI analysis and not a medical diagnosis."
+}

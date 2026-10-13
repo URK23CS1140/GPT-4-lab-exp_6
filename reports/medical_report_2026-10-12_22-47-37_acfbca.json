@@ -1,0 +1,46 @@
+{
+  "report_id": "#20261012_224737_acfbca",
+  "timestamp": "2026-10-12 22:47:37",
+  "engine": "Test Engine",
+  "patient_profile": {
+    "age": 22,
+    "sex": "Male",
+    "demographic_group": "Adult"
+  },
+  "clinical_context": {
+    "duration": "2 days",
+    "severity": "Mild",
+    "previous_conditions": "None",
+    "medications": "None",
+    "allergies": "None",
+    "additional_info": "None"
+  },
+  "raw_input_symptoms": "I have fever and cough",
+  "analysis": {
+    "reported_symptoms": [
+      "Fever",
+      "Cough",
+      "Sore throat"
+    ],
+    "duration": "2 days",
+    "severity": "Mild",
+    "possible_conditions": [
+      {
+        "name": "Common cold",
+        "explanation": "Upper respiratory viral infection."
+      }
+    ],
+    "why_considered": "Symptoms match respiratory infection.",
+    "additional_information_needed": [
+      "Temperature"
+    ],
+    "follow_up_questions": [
+      "Is the cough dry?"
+    ],
+    "triage_level": "MODERATE",
+    "medical_attention": "Routine evaluation if persists.",
+    "red_flags": [],
+    "disclaimer": "This is an informational AI analysis and not a medical diagnosis."
+  },
+  "disclaimer": "This is an informational AI analysis and not a medical diagnosis."
+}

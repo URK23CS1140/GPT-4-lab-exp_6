@@ -1,0 +1,58 @@
+===================================================================
+MEDICAL SYMPTOM ANALYSIS REPORT
+Report ID: #20261013_152313_40f143
+Generated: 2026-10-13 15:23:13
+Inference Engine: Clinical Diagnostic Rule Engine (With Fallback)
+===================================================================
+
+PATIENT INFORMATION
+-------------------------------------------------------------------
+Age: 58 years (Adult)
+Sex: Male
+Duration: 30 minutes
+Reported Severity: Severe
+Medical History: Hypertension
+Medications: None
+Allergies: None
+Additional Information: None
+
+TRIAGE ASSESSMENT
+-------------------------------------------------------------------
+TRIAGE LEVEL: EMERGENCY
+Red Flag Alerts:
+⚠️ Chest pain or pressure (cardiac emergency risk)
+⚠️ Severe respiratory distress / acute shortness of breath
+
+MEDICAL SYMPTOM ANALYSIS
+-------------------------------------------------------------------
+Reported Symptoms:
+• Shortness of breath (Dyspnea)
+• Chest pain
+
+Duration:
+30 minutes
+
+Possible Conditions:
+1. Acute Coronary Syndrome / Cardiac Event
+   Reported chest pain radiating to arm, neck, or jaw is a classic emergency red flag requiring immediate ECG and cardiac marker evaluation.
+2. Acute Pulmonary or Vascular Emergency
+   Severe acute cardiopulmonary compromise cannot be ruled out without immediate clinical intervention.
+
+Why These Were Considered:
+Critical red-flag symptoms were identified (e.g., chest pain with radiation, acute breathing distress, or neurological signs). These presentations demand emergent medical evaluation to rule out life-threatening cardiovascular or respiratory conditions.
+
+Additional Information Needed:
+• Immediate 12-lead Electrocardiogram (ECG)
+• Troponin and cardiac biomarker laboratory panel
+• Vital signs (Blood pressure, Heart rate, Pulse Oximetry)
+
+Follow-up Clarifying Questions:
+• Have you taken any over-the-counter medications (e.g., paracetamol, ibuprofen), and did they relieve symptoms?
+
+Medical Attention:
+Seek IMMEDIATE emergency medical attention. Call local emergency services (e.g., 911 / 112) or proceed to the nearest emergency department right away.
+
+-------------------------------------------------------------------
+DISCLAIMER:
+This is an informational AI analysis and not a medical diagnosis.
+===================================================================

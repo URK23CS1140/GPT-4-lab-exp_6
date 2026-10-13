@@ -1,0 +1,54 @@
+===================================================================
+MEDICAL SYMPTOM ANALYSIS REPORT
+Report ID: #20261012_224737_acfbca
+Generated: 2026-10-12 22:47:37
+Inference Engine: Test Engine
+===================================================================
+
+PATIENT INFORMATION
+-------------------------------------------------------------------
+Age: 22 years (Adult)
+Sex: Male
+Duration: 2 days
+Reported Severity: Mild
+Medical History: None
+Medications: None
+Allergies: None
+Additional Information: None
+
+TRIAGE ASSESSMENT
+-------------------------------------------------------------------
+TRIAGE LEVEL: MODERATE
+Red Flag Alerts:
+None detected.
+
+MEDICAL SYMPTOM ANALYSIS
+-------------------------------------------------------------------
+Reported Symptoms:
+• Fever
+• Cough
+• Sore throat
+
+Duration:
+2 days
+
+Possible Conditions:
+1. Common cold
+   Upper respiratory viral infection.
+
+Why These Were Considered:
+Symptoms match respiratory infection.
+
+Additional Information Needed:
+• Temperature
+
+Follow-up Clarifying Questions:
+• Is the cough dry?
+
+Medical Attention:
+Routine evaluation if persists.
+
+-------------------------------------------------------------------
+DISCLAIMER:
+This is an informational AI analysis and not a medical diagnosis.
+===================================================================

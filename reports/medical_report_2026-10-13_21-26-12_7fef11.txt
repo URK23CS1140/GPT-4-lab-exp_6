@@ -1,0 +1,67 @@
+===================================================================
+MEDICAL SYMPTOM ANALYSIS REPORT
+Report ID: #20261013_212612_7fef11
+Generated: 2026-10-13 21:26:12
+Inference Engine: Clinical Diagnostic Rule Engine (With Fallback)
+===================================================================
+
+PATIENT INFORMATION
+-------------------------------------------------------------------
+Age: 22 years (Adult)
+Sex: Male
+Duration: 2 Days
+Reported Severity: Moderate
+Medical History: None
+Medications: None
+Allergies: None
+Additional Information: None
+
+TRIAGE ASSESSMENT
+-------------------------------------------------------------------
+TRIAGE LEVEL: MODERATE
+Red Flag Alerts:
+None detected.
+
+MEDICAL SYMPTOM ANALYSIS
+-------------------------------------------------------------------
+Reported Symptoms:
+• Mild headache
+• Headache
+• Sore throat
+• Fever
+• Cough
+• Fatigue / tiredness
+
+Duration:
+2 Days
+
+Possible Conditions:
+1. Common cold
+   Viral upper respiratory tract infection typically caused by rhinoviruses, presenting with sore throat, nasal congestion, and mild cough.
+2. Influenza
+   Acute respiratory illness characterized by sudden onset of fever, headache, myalgia, sore throat, and cough.
+3. Other respiratory infection
+   Other viral or mild bacterial syndromes affecting the respiratory tract (such as pharyngitis, acute bronchitis, or RSV).
+
+Why These Were Considered:
+The reported symptoms can occur with several respiratory conditions. Fever, sore throat, and cough are characteristic manifestations of viral infections affecting the upper respiratory tract. These symptoms alone are not sufficient to establish a diagnosis.
+
+Additional Information Needed:
+• Exact temperature reading
+• Severity of symptoms
+• Breathing difficulty
+• Other associated symptoms (e.g., ear pain, chills, body ache)
+
+Follow-up Clarifying Questions:
+• What is your exact measured body temperature (e.g., above 38°C / 100.4°F)?
+• Is your cough dry, or producing sputum/mucus (if so, what color)?
+• Are you experiencing any shortness of breath or difficulty catching your breath?
+• Have you had recent exposure to individuals with similar respiratory infections or recent travel?
+
+Medical Attention:
+Routine Consultation / Monitored Self-Care. Seek professional medical evaluation if symptoms are severe, worsening, or persist beyond 3-5 days.
+
+-------------------------------------------------------------------
+DISCLAIMER:
+This is an informational AI analysis and not a medical diagnosis.
+===================================================================

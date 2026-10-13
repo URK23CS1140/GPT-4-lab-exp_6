@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Medical Symptom Assistant using GPT-4</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Google Fonts for sleek typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Application Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="header-brand-icon">
+                    <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/>
+                    </svg>
+                </div>
+                <div class="header-titles">
+                    <div class="badge-exp">24CS2506 • EXPERIMENT 6</div>
+                    <h1 class="app-title">AI-Powered Medical Symptom Assistant</h1>
+                </div>
+            </div>
+
+            <div class="header-right">
+                <div class="status-indicator-pill" id="liveStatusBadge">
+                    <span class="status-dot" style="background-color: {{ provider.color }};"></span>
+                    <span class="status-text" id="statusText">{{ provider.provider }}</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Quick View Presets Toolbar -->
+        <nav class="presets-toolbar">
+            <span class="presets-label">Quick View Presets:</span>
+            <div class="presets-buttons">
+                <button type="button" class="preset-btn" id="btnPresetRespiratory">
+                    <span class="icon">📋</span> Respiratory (Lab Example)
+                </button>
+                <button type="button" class="preset-btn" id="btnPresetMigraine">
+                    <span class="icon">⚡</span> Tension & Migraine
+                </button>
+                <button type="button" class="preset-btn btn-danger-subtle" id="btnPresetEmergency">
+                    <span class="icon">🚨</span> Emergency Red Flag
+                </button>
+                <button type="button" class="preset-btn btn-clear" id="btnClearForm">
+                    <span class="icon">🗑️</span> Clear
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main 2-Column Dashboard Grid -->
+        <main class="dashboard-grid">
+            <!-- Left Card: Patient Intake & Clinical Context -->
+            <section class="card intake-card">
+                <div class="card-header">
+                    <h2>Patient Intake & Clinical Context</h2>
+                    <p class="card-subtitle">Enter patient information and describe symptoms in natural language</p>
+                </div>
+
+                <form id="symptomForm" class="clinical-form">
+                    <!-- Natural Language Description -->
+                    <div class="form-group">
+                        <label for="symptomDescription" class="form-label required">
+                            Natural Language Symptom Description
+                        </label>
+                        <span class="form-helper">
+                            A user does not have to enter symptoms in a fixed format. Describe symptoms freely in natural conversational language.
+                        </span>
+                        <textarea 
+                            id="symptomDescription" 
+                            name="symptoms" 
+                            rows="4" 
+                            class="form-control" 
+                            placeholder="e.g. I've had a fever and cough since yesterday. I also feel tired and have a mild headache, and have a sore throat when swallowing..." 
+                            required
+                        ></textarea>
+                    </div>
+
+                    <!-- Age & Sex Row -->
+                    <div class="form-row">
+                        <div class="form-group col-half">
+                            <label for="patientAge" class="form-label required">Age</label>
+                            <input 
+                                type="number" 
+                                id="patientAge" 
+                                name="age" 
+                                class="form-control" 
+                                min="0" 
+                                max="120" 
+                                placeholder="22" 
+                                required
+                            >
+                        </div>
+                        <div class="form-group col-half">
+                            <label for="patientSex" class="form-label">Sex</label>
+                            <select id="patientSex" name="sex" class="form-control">
+                                <option value="Male" selected>Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Duration & Severity Row -->
+                    <div class="form-row">
+                        <div class="form-group col-half">
+                            <label for="symptomDuration" class="form-label required">Duration</label>
+                            <input 
+                                type="text" 
+                                id="symptomDuration" 
+                                name="duration" 
+                                class="form-control" 
+                                placeholder="2 days" 
+                                required
+                            >
+                        </div>
+                        <div class="form-group col-half">
+                            <label class="form-label required">Reported Severity</label>
+                            <div class="severity-segmented-group" id="severitySelector">
+                                <button type="button" class="severity-pill" data-severity="Mild">Mild</button>
+                                <button type="button" class="severity-pill active" data-severity="Moderate">Moderate</button>
+                                <button type="button" class="severity-pill" data-severity="Severe">Severe</button>
+                            </div>
+                            <input type="hidden" id="reportedSeverity" name="severity" value="Moderate">
+                        </div>
+                    </div>
+
+                    <!-- Medical History / Comorbidities -->
+                    <div class="form-group">
+                        <label for="medicalHistory" class="form-label">Previous Medical Conditions</label>
+                        <input 
+                            type="text" 
+                            id="medicalHistory" 
+                            name="previous_conditions" 
+                            class="form-control" 
+                            placeholder="None" 
+                            value="None"
+                        >
+                    </div>
+
+                    <!-- Medications & Allergies Row -->
+                    <div class="form-row">
+                        <div class="form-group col-half">
+                            <label for="currentMedications" class="form-label">Current Medications</label>
+                            <input 
+                                type="text" 
+                                id="currentMedications" 
+                                name="medications" 
+                                class="form-control" 
+                                placeholder="None" 
+                                value="None"
+                            >
+                        </div>
+                        <div class="form-group col-half">
+                            <label for="knownAllergies" class="form-label">Known Allergies</label>
+                            <input 
+                                type="text" 
+                                id="knownAllergies" 
+                                name="allergies" 
+                                class="form-control" 
+                                placeholder="None" 
+                                value="None"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="form-group">
+                        <label for="additionalInformation" class="form-label">Additional Information</label>
+                        <textarea 
+                            id="additionalInformation" 
+                            name="additional_info" 
+                            rows="2" 
+                            class="form-control" 
+                            placeholder="Contextual observations such as recorded body temperature, travel history, or recent sick contacts..."
+                        ></textarea>
+                    </div>
+
+                    <!-- Submit Action Button -->
+                    <div class="form-action">
+                        <button type="submit" class="btn-analyze" id="btnAnalyze">
+                            <span class="btn-text">✨ Analyze Symptoms with GPT-4</span>
+                            <span class="btn-spinner hidden" id="analyzeSpinner"></span>
+                        </button>
+                        <div class="workflow-footnote">SYSTEM WORKFLOW PIPELINE (PAGES 3–4)</div>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Right Card: Structured Symptom Analysis -->
+            <section class="card analysis-card">
+                <!-- Initial Empty State -->
+                <div class="empty-state-view" id="emptyStateView">
+                    <div class="empty-state-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48" stroke="#3b82f6" stroke-width="1.8" fill="none">
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="empty-title">Structured Symptom Analysis</h3>
+                    <p class="empty-desc">
+                        Complete the patient context form on the left or click one of the quick view presets to initiate the clinical symptom analysis pipeline.
+                    </p>
+                    <div class="example-quote-box">
+                        <div class="quote-header">EXAMPLE INPUT FROM LAB SHEET:</div>
+                        <div class="quote-content">"I have a sore throat, mild fever and cough."</div>
+                    </div>
+                </div>
+
+                <!-- Active Analysis Results Container (Initially Hidden) -->
+                <div class="report-results-view hidden" id="reportResultsView">
+                    <!-- Top Action / Metadata Bar -->
+                    <div class="report-meta-bar">
+                        <div class="meta-left">
+                            <span class="badge-report-tag">CLINICAL REPORT</span>
+                            <span class="report-id-text" id="displayReportId">#20261012_224500_hc1833</span>
+                            <span class="badge-engine-pill" id="displayEngineTag">Clinical Diagnostic Rule Engine (With Fallback)</span>
+                        </div>
+                        <div class="meta-right-actions">
+                            <button type="button" class="btn-action-sm" id="btnCopyReport" title="Copy analysis text">
+                                📋 Copy
+                            </button>
+                            <button type="button" class="btn-action-sm" id="btnDownloadTxt" title="Download text report">
+                                📄 TXT
+                            </button>
+                            <button type="button" class="btn-action-sm" id="btnDownloadJson" title="Download JSON report">
+                                💾 JSON
+                            </button>
+                            <button type="button" class="btn-action-sm" id="btnPrintReport" title="Print this report">
+                                🖨️ Print
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Triage Level Alert Banner -->
+                    <div class="triage-banner" id="triageBanner">
+                        <div class="triage-title" id="triageTitle">TRIAGE LEVEL: MODERATE</div>
+                        <div class="triage-guidance" id="triageGuidance">Routine Consultation / Monitored Self-Care</div>
+                    </div>
+
+                    <!-- Red Flag Alert (shown only if emergency/red flags exist) -->
+                    <div class="red-flag-alert hidden" id="redFlagAlertBox">
+                        <div class="alert-icon">⚠️</div>
+                        <div class="alert-text">
+                            <strong>EMERGENCY RED FLAGS DETECTED:</strong>
+                            <ul id="redFlagsList"></ul>
+                        </div>
+                    </div>
+
+                    <!-- Structured Medical Report Content -->
+                    <div class="report-content-body" id="printableReportArea">
+                        <h3 class="analysis-section-heading">MEDICAL SYMPTOM ANALYSIS</h3>
+
+                        <div class="section-block">
+                            <h4 class="block-title">Reported Symptoms:</h4>
+                            <ul class="bullet-list" id="reportedSymptomsList"></ul>
+                        </div>
+
+                        <div class="section-block">
+                            <h4 class="block-title">Duration:</h4>
+                            <p class="block-text" id="displayDuration">2 days</p>
+                        </div>
+
+                        <div class="section-block">
+                            <h4 class="block-title">Possible Conditions:</h4>
+                            <ol class="numbered-conditions-list" id="possibleConditionsList"></ol>
+                        </div>
+
+                        <div class="section-block">
+                            <h4 class="block-title">Why These Were Considered:</h4>
+                            <p class="block-text" id="displayWhyConsidered"></p>
+                        </div>
+
+                        <div class="section-block">
+                            <h4 class="block-title">Additional Information Needed:</h4>
+                            <ul class="bullet-list" id="additionalInfoNeededList"></ul>
+                        </div>
+
+                        <div class="section-block">
+                            <h4 class="block-title">Follow-up Clarifying Questions:</h4>
+                            <ul class="bullet-list" id="followUpQuestionsList"></ul>
+                        </div>
+
+                        <div class="section-block">
+                            <h4 class="block-title">Medical Attention:</h4>
+                            <p class="block-text" id="displayMedicalAttention"></p>
+                        </div>
+
+                        <!-- Safety Disclaimer Box -->
+                        <div class="disclaimer-callout">
+                            <strong>Disclaimer:</strong>
+                            <span id="displayDisclaimer">This is an informational AI analysis and not a medical diagnosis.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Page Footer -->
+        <footer class="app-footer">
+            <p>24CS2506 - Building Applications using GPT-4 | Department of Computer Science & Engineering</p>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
